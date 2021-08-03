@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
-import Slider from 'react-slick';
 
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { Wrapper, Container, Search, Logo, Map, CarouselTitle } from './styles';
+import { Wrapper, Container, Search, Logo, Map, Carousel, CarouselTitle } from './styles';
 import { Card } from '../../components';
 
 export default () => {
@@ -35,14 +34,14 @@ export default () => {
             <Input value={inputValue} onChange={(e) => setInputValue(e.currentTarget.value)} />
           </TextField>
           <CarouselTitle>Na sua Área</CarouselTitle>
-          <Slider {...settings}>
+          <Carousel {...settings}>
             <Card photo={restaurante} />
             <Card photo={restaurante} />
             <Card photo={restaurante} />
             <Card photo={restaurante} />
             <Card photo={restaurante} />
             <Card photo={restaurante} />
-          </Slider>
+          </Carousel>
         </Search>
         Hello World
       </Container>
@@ -50,5 +49,3 @@ export default () => {
     </Wrapper>
   );
 };
-
-// /static/media/restaurante-fake.cd9dc0a0.png
