@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Wrapper, Container, Search, Logo, Map, CarouselTitle } from './styles';
+import { Card } from '../../components';
 
 export default () => {
   const [inputValue, setInputValue] = useState('');
@@ -35,18 +36,12 @@ export default () => {
           </TextField>
           <CarouselTitle>Na sua Área</CarouselTitle>
           <Slider {...settings}>
-            <div>
-              <img src={restaurante} alt="" />
-            </div>
-            <div>
-              <img src={restaurante} alt="" />
-            </div>
-            <div>
-              <img src={restaurante} alt="" />
-            </div>
-            <div>
-              <img src={restaurante} alt="" />
-            </div>
+            <Card photo={restaurante} />
+            <Card photo={restaurante} />
+            <Card photo={restaurante} />
+            <Card photo={restaurante} />
+            <Card photo={restaurante} />
+            <Card photo={restaurante} />
           </Slider>
         </Search>
         Hello World
@@ -55,3 +50,5 @@ export default () => {
     </Wrapper>
   );
 };
+
+// /static/media/restaurante-fake.cd9dc0a0.png
