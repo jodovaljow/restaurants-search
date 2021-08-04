@@ -8,10 +8,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Wrapper, Container, Search, Logo, Map, Carousel, CarouselTitle } from './styles';
-import { Card, Restaurant } from '../../components';
+import { Card, Restaurant, Modal } from '../../components';
 
 export default () => {
   const [inputValue, setInputValue] = useState('');
+  const [modalOpened, setModalOpened] = useState(false);
 
   const settings = {
     dots: false,
@@ -48,6 +49,7 @@ export default () => {
         <Restaurant />
       </Container>
       <Map />
+      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
     </Wrapper>
   );
 };
