@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Wrapper, Container, Search, Logo, Map, Carousel, CarouselTitle } from './styles';
-import { Card } from '../../components';
+import { Card, RestaurantCard } from '../../components';
 
 export default () => {
   const [inputValue, setInputValue] = useState('');
@@ -45,7 +45,7 @@ export default () => {
             <Card photo={restaurante} title="nome sei lá" />
           </Carousel>
         </Search>
-        Hello World
+        <RestaurantCard />
       </Container>
       <Map />
     </Wrapper>
