@@ -7,8 +7,8 @@ import restaurante from '../../assets/restaurante-fake.png';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { Wrapper, Container, Search, Logo, Map, Carousel, CarouselTitle } from './styles';
-import { Card, Restaurant, Modal } from '../../components';
+import { Wrapper, Container, Search, Logo, Carousel, CarouselTitle } from './styles';
+import { Card, Restaurant, Modal, Map } from '../../components';
 
 export default () => {
   const [inputValue, setInputValue] = useState('');
