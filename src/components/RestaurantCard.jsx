@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactStars from 'react-rating-stars-component';
 
-import restaurante from '../assets/restaurante-fake.png';
-
 const RestaurantCard = styled.div`
   display: flex;
   justify-content: space-between;
@@ -48,13 +46,14 @@ const RestaurantPhoto = styled.img`
   border-radius: 6px;
 `;
 
-export const Restaurant = () => (
+export const Restaurant = ({ restaurant }) => (
   <RestaurantCard>
     <RestaurantInfo>
-      <Title>Nome do Restaurante</Title>
-      <ReactStars isHalf activeColor="#e7711c" edit={false} value={4} />
-      <Address>Rua Rio de Janeiro, 120</Address>
+      <Title>{restaurant.name}</Title>
+      <ReactStars isHalf activeColor="#e7711c" edit={false} value={restaurant.rating} />
+      <Address>{restaurant.vicinity || restaurant.formatted_address}</Address>
     </RestaurantInfo>
-    <RestaurantPhoto src={restaurante} alt="Foto do Restaurante" />
+
+    {restaurant.photos ? <RestaurantPhoto src={restaurant.photos[0].getUrl()} /> : null}
   </RestaurantCard>
 );
