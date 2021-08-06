@@ -11,6 +11,7 @@ const MapContainer = (props) => {
   const { google, query, placeId } = props;
 
   function searchByQuery(query) {
+    dispatch(setRestaurants([]));
     const service = new google.maps.places.PlacesService(map);
 
     const request = {
@@ -29,6 +30,7 @@ const MapContainer = (props) => {
   }
 
   function getRestaurantById(placeId) {
+    dispatch(setRestaurant(null));
     const service = new google.maps.places.PlacesService(map);
 
     const request = {
@@ -48,15 +50,16 @@ const MapContainer = (props) => {
     if (query) {
       searchByQuery(query);
     }
-  });
+  }, [query]);
 
   useEffect(() => {
     if (placeId) {
       getRestaurantById(placeId);
     }
-  });
+  }, [placeId]);
 
   function searchNearby(map, center) {
+    dispatch(setRestaurants([]));
     const service = new google.maps.places.PlacesService(map);
 
     const request = {
