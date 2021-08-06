@@ -17,7 +17,7 @@ import {
   ModalTitle,
   ModalContent,
 } from './styles';
-import { Card, Restaurant, Modal, Map, Loader } from '../../components';
+import { Card, Restaurant, Modal, Map, Loader, Skeleton } from '../../components';
 
 export default () => {
   const [inputValue, setInputValue] = useState('');
@@ -100,7 +100,14 @@ export default () => {
                 : 'Fechado neste momento :-('}
             </ModalContent>
           </>
-        ) : null}
+        ) : (
+          <>
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+          </>
+        )}
       </Modal>
     </Wrapper>
   );
