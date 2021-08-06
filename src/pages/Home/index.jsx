@@ -66,15 +66,13 @@ export default () => {
             <>
               <CarouselTitle>Na sua Área</CarouselTitle>
               <Carousel {...settings}>
-                {restaurants
-                  .filter((restaurant) => restaurant.photos)
-                  .map((restaurant) => (
-                    <Card
-                      key={restaurant.place_id}
-                      photo={restaurant.photos ? restaurant.photos[0].getUrl() : null}
-                      title={restaurant.name}
-                    />
-                  ))}
+                {restaurants.map((restaurant) => (
+                  <Card
+                    key={restaurant.place_id}
+                    photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurant.icon}
+                    title={restaurant.name}
+                  />
+                ))}
               </Carousel>
             </>
           ) : (
