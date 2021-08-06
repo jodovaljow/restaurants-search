@@ -46,8 +46,8 @@ const RestaurantPhoto = styled.img`
   border-radius: 6px;
 `;
 
-export const Restaurant = ({ restaurant }) => (
-  <RestaurantCard>
+export const Restaurant = ({ restaurant, onClick }) => (
+  <RestaurantCard onClick={onClick}>
     <RestaurantInfo>
       <Title>{restaurant.name}</Title>
       <ReactStars isHalf activeColor="#e7711c" edit={false} value={restaurant.rating} />

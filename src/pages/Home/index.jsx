@@ -7,18 +7,29 @@ import logo from '../../assets/logo.svg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { Wrapper, Container, Search, Logo, Carousel, CarouselTitle } from './styles';
+import {
+  Wrapper,
+  Container,
+  Search,
+  Logo,
+  Carousel,
+  CarouselTitle,
+  ModalTitle,
+  ModalContent,
+} from './styles';
 import { Card, Restaurant, Modal, Map } from '../../components';
 
 export default () => {
   const [inputValue, setInputValue] = useState('');
   const [modalOpened, setModalOpened] = useState(false);
   const [query, setQuery] = useState('');
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const [placeId, setPlaceId] = useState(null);
+  const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
 
   const settings = {
     dots: false,
     infinite: true,
+    autoplay: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -29,6 +40,11 @@ export default () => {
     if (e.key === 'Enter') {
       setQuery(inputValue);
     }
+  }
+
+  function handleOpenModal(placeId) {
+    setPlaceId(placeId);
+    setModalOpened(true);
   }
 
   return (
@@ -58,11 +74,24 @@ export default () => {
           </Carousel>
         </Search>
         {restaurants.map((restaurant) => (
-          <Restaurant key={restaurant.place_id} restaurant={restaurant} />
+          <Restaurant
+            key={restaurant.place_id}
+            restaurant={restaurant}
+            onClick={() => handleOpenModal(restaurant.place_id)}
+          />
         ))}
       </Container>
-      <Map query={query} />
-      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
+      <Map query={query} placeId={placeId} />
+      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
+        <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+        <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+        <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
+        <ModalContent>
+          {restaurantSelected?.opening_hours?.isOpen()
+            ? 'Aberto agora :-)'
+            : 'Fechado neste momento :-('}
+        </ModalContent>
+      </Modal>
     </Wrapper>
   );
 };
