@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactStars from 'react-rating-stars-component';
+import Skeleton from './Skeleton';
 
 const RestaurantCard = styled.div`
   display: flex;
@@ -44,16 +45,29 @@ const RestaurantPhoto = styled.img`
   height: 100px;
   object-fit: cover;
   border-radius: 6px;
+  display: ${(props) => (props.imageLoaded ? 'block' : 'none')};
 `;
 
-export const Restaurant = ({ restaurant, onClick }) => (
-  <RestaurantCard onClick={onClick}>
-    <RestaurantInfo>
-      <Title>{restaurant.name}</Title>
-      <ReactStars isHalf activeColor="#e7711c" edit={false} value={restaurant.rating} />
-      <Address>{restaurant.vicinity || restaurant.formatted_address}</Address>
-    </RestaurantInfo>
+export const Restaurant = ({ restaurant, onClick }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-    {restaurant.photos ? <RestaurantPhoto src={restaurant.photos[0].getUrl()} /> : null}
-  </RestaurantCard>
-);
+  return (
+    <RestaurantCard onClick={onClick}>
+      <RestaurantInfo>
+        <Title>{restaurant.name}</Title>
+        <ReactStars isHalf activeColor="#e7711c" edit={false} value={restaurant.rating} />
+        <Address>{restaurant.vicinity || restaurant.formatted_address}</Address>
+      </RestaurantInfo>
+
+      {restaurant.photos ? (
+        <RestaurantPhoto
+          src={restaurant.photos[0].getUrl()}
+          onLoad={() => setImageLoaded(true)}
+          imageLoaded={imageLoaded}
+        />
+      ) : null}
+
+      {restaurant.photos && !imageLoaded && <Skeleton width="100px" height="100px" />}
+    </RestaurantCard>
+  );
+};
